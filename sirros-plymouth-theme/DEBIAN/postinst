@@ -10,7 +10,7 @@ WALLPAPER_PATH="/usr/share/backgrounds/wallpaper_sirros.png"
 # Créer le dossier gtk-3.0 s'il n'existe pas
 if [ ! -d "$GTK_CONFIG_DIR" ]; then
   mkdir -p "$GTK_CONFIG_DIR"
-  chown $USER:$USER "$GTK_CONFIG_DIR" # Debug test to avoid error chown
+  chown $USER:$USER "$GTK_CONFIG_DIR"
 fi
 
 # Créer ou écraser gtk.css avec le contenu voulu
@@ -37,7 +37,7 @@ phosh-app-grid {
 EOF
 
 # Appliquer la bonne propriété utilisateur/groupe sur gtk.css
-chown $USER:$USER "$GTK_CSS_FILE" # Debug test to avoid error chown
+chown $USER:$USER "$GTK_CSS_FILE"
 
 # Configuration du thème Plymouth
 PLYMOUTH_THEME_NAME="sirros"
@@ -52,5 +52,9 @@ if [ -f "$PLYMOUTH_THEME_PATH" ]; then
 else
     echo "[!] Fichier $PLYMOUTH_THEME_PATH introuvable."
 fi
+
+# Redémarrer phosh pour appliquer la config GTK
+echo "[+] Redémarrage de phosh..."
+systemctl restart phosh || echo "[!] Impossible de redémarrer phosh. Vérifiez que le service existe."
 
 exit 0
