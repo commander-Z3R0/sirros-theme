@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        USER_HOME="/home/sirr"
+        ICON_SRC="/usr/share/icons/sirros/sirros.png"
+        ICON_DEST="$USER_HOME/.face"
+
+        if [ -d "$USER_HOME" ]; then
+            install -d -m 0755 "$USER_HOME"
+
+            install -m 0644 "$ICON_SRC" "$ICON_DEST"
+
+            chown sirr:sirr "$ICON_DEST"
+        fi
+        ;;
+esac
+
+exit 0
